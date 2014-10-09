@@ -15,21 +15,23 @@ Everything was setup using [PostfixAmavisNew][3] from the Ubuntu Community Help 
 Usage
 =====
 
-> $ ./amavislogsumm.py -h
-> usage: amavislogsumm.py [-h] [-d {today,yesterday}] [--startup-detail]
->                         logfiles [logfiles ...]
-> 
-> amavislogsumm.py - Produce AMaViSd-new logfile summary
-> 
-> positional arguments:
->   logfiles
-> 
-> optional arguments:
->   -h, --help            show this help message and exit
->   -d {today,yesterday}, --day {today,yesterday}
->   --startup-detail
+```
+$ ./amavislogsumm.py -h
+usage: amavislogsumm.py [-h] [-d {today,yesterday}] [--startup-detail]
+                        logfiles [logfiles ...]
 
-> $ sudo ./amavislogsumm.py -d today /var/log/mail.log
+amavislogsumm.py - Produce AMaViSd-new logfile summary
+
+positional arguments:
+  logfiles
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d {today,yesterday}, --day {today,yesterday}
+  --startup-detail
+
+$ sudo ./amavislogsumm.py -d today /var/log/mail.log
+```
 
 [1]: http://jimsun.linxnet.com/postfix_contrib.html     "JIMSUN Postfix Contribs"
 [2]: http://www.ubuntu.com/server                       "Ubuntu Server"
