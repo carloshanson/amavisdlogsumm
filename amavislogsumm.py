@@ -95,12 +95,23 @@ def print_summary(log_day, args):
     print('------------')
     print('')
 
+    # Find the total processed.
+    total_processed = 0
+    for value in action_summary.values():
+        total_processed += value
+
     # Find the length of the longest value.
     values = [str(value) for value in action_summary.values()]
     padding = len(max(values, key=len))
+    # The * in the %*s lets us add padding.
+    print('%*d   total processed' % (padding, total_processed))
     for key, value in sorted(action_summary.items()):
-        # the * in the %*s lets us add padding
-        print('%*s   %s' % (padding, value, key))
+        if key.startswith('Blocked'):
+            # Show percentage of total processed.
+            percent_blocked = float(value)/total_processed * 100
+            print('%*d   %s (%.1f%%)' % (padding, value, key, percent_blocked))
+        else:
+            print('%*d   %s' % (padding, value, key))
 
     print('')
     if info_summary:
