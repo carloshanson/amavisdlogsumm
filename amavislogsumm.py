@@ -33,6 +33,7 @@ action_pattern = re.compile(r'^(Passed|Blocked)')
 info_pattern = re.compile(r'^INFO:')
 
 action_summary = {}
+action_summary_by_hour = {}
 info_summary = []
 error_summary = []
 startup_logs = []
@@ -79,7 +80,15 @@ def process(log_day, args):
             details = details_match.groupdict()
             action = details['action']
             if action_pattern.match(action):
+                # grand totals
                 action_summary[action] = action_summary.get(action, 0) + 1
+                # per hour totals
+                day = '%s %s' % (log_date.month, log_date.day)
+                day_summary = action_summary_by_hour.get(day, {})
+                hour_summary = day_summary.get(log_date.hour, {})
+                hour_summary[action] = hour_summary.get(action, 0) + 1
+                day_summary[log_date.hour] = hour_summary
+                action_summary_by_hour[day] = day_summary
             elif info_pattern.match(action):
                 info_summary.append(parts['details'])
 
@@ -112,6 +121,16 @@ def print_summary(log_day, args):
             print('%*d   %s (%.1f%%)' % (padding, value, key, percent_blocked))
         else:
             print('%*d   %s' % (padding, value, key))
+
+    print('')
+    print('Per-Hour Summary')
+    print('----------------')
+    print('%-9s %9s %9s' % ('time', 'blocked', 'passed'))
+    for k, v in action_summary_by_hour.items():
+        for hour, data in v.items():
+            print('%02d00-%02d00 %9d %9d' % (hour, hour+1, data['Blocked SPAM'], data['Passed CLEAN']))
+    #print(action_summary_by_hour)
+    print('')
 
     print('')
     if info_summary:
