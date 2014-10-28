@@ -16,11 +16,11 @@ Usage
 =====
 
 ```
-$ ./amavislogsumm.py -h
-usage: amavislogsumm.py [-h] [-d {today,yesterday}] [--startup-detail]
+$ ./amavisdlogsumm.py -h
+usage: amavisdlogsumm.py [-h] [-d {today,yesterday}] [--startup-detail]
                         logfiles [logfiles ...]
 
-amavislogsumm.py - Produce AMaViSd-new logfile summary
+amavisdlogsumm.py - Produce AMaViSd-new logfile summary
 
 positional arguments:
   logfiles
@@ -30,7 +30,7 @@ optional arguments:
   -d {today,yesterday}, --day {today,yesterday}
   --startup-detail
 
-$ sudo ./amavislogsumm.py -d today /var/log/mail.log
+$ sudo ./amavisdlogsumm.py -d today /var/log/mail.log
 ```
 
 [1]: http://www.amavis.org/                             "amavisd-new"
