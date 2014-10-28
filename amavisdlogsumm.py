@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import codecs
 import operator
 import re
 import sys
@@ -57,7 +58,7 @@ def main():
 
 def process(log_day, args):
     for logfile in args.logfiles:
-        for line in open(logfile, 'r'):
+        for line in codecs.open(logfile, 'r', encoding='Windows-1252'):
             #print(line.strip())
             match = line_pattern.match(line)
             parts = match.groupdict()
